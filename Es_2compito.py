@@ -1,3 +1,5 @@
+import math
 num = int(input("inserisci un numero"));
-for i<num
+fattoriale = math.factorial(num)
+print(f"Il fattoriale di {num} è {fattoriale}")
     
