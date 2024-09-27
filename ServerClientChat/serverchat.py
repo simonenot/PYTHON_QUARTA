@@ -1,6 +1,6 @@
 import socket
 
-server_address = ("192.168.1.54", 12345)
+server_address = ("10.210.0.40", 12345)
 BUFFER_SIZE = 4092  # Massima dimensione trasmissibile
 
 udp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

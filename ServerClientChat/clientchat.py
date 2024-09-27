@@ -1,6 +1,6 @@
 import socket
 
-server_address = ("192.168.1.54", 12345)
+server_address = ("10.210.0.40", 12345)
 BUFFER_SIZE = 4092  # Massima dimensione trasmissibile
 
 udp_client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -13,7 +13,7 @@ while True:
         print("Chiusura del client.")
         break
 
-    data, _ = udp_client_socket.recvfrom(BUFFER_SIZE)
+    data, address = udp_client_socket.recvfrom(BUFFER_SIZE)
     response = data.decode('utf-8')
     print(f"Risposta dal server: {response}")
 
