@@ -1,6 +1,6 @@
 import socket
 
-server_address = ("10.210.0.40", 12345)
+server_address = ("172.20.10.4", 12345)
 BUFFER_SIZE = 4092  # Massima dimensione trasmissibile
 
 udp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -11,7 +11,7 @@ print("Server in ascolto...")
 while True:
     data, address = udp_server_socket.recvfrom(BUFFER_SIZE)  # Mette in ascolto il server
     message = data.decode('utf-8')
-    print(f"Messaggio ricevuto: {message} da {address}")
+    print(f"CLIENT: {message}")
     
     if message == "break":
         print("Chiusura del server.")
