@@ -1,20 +1,29 @@
-import socket
+import socket as s
+import threading as t
 
-server_address = ("172.20.10.4", 12345)
-BUFFER_SIZE = 4092  # Massima dimensione trasmissibile
+SERVER_ADDRESS = ("192.168.126.1", 8900)
+BUFFER_SIZE = 4096
 
-udp_client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-while True:
-    message = input("Inserisci  messaggio: ")
-    udp_client_socket.sendto(message.encode('utf-8'), server_address)
+def main():
+    client_UDP = s.socket(s.AF_INET, s.SOCK_DGRAM)
+    client_UDP.sendto("connessione".encode("utf-8"), SERVER_ADDRESS)
+    thread_invio = t.Thread(target=invio, args=(client_UDP,))
+    thread_ricezione = t.Thread(target=ricezione, args=(client_UDP,))
     
-    if message == "break":
-        print("Chiusura del client.")
-        break
+    thread_invio.start()
+    thread_ricezione.start()
 
-    data, address = udp_client_socket.recvfrom(BUFFER_SIZE)
-    response = data.decode('utf-8')
-    print(f"Server: {response}")
+# Funzione per inviare messaggi
+def invio(client_UDP):
+    while True:
+        data = input("")
+        client_UDP.sendto(data.encode('utf-8'), SERVER_ADDRESS)
 
-udp_client_socket.close()
+# Funzione per ricevere messaggi
+def ricezione(client_UDP):
+    while True:
+        data, address = client_UDP.recvfrom(BUFFER_SIZE)
+        print(f"Server: {data.decode('utf-8')}")
+
+if __name__ == "__main__":
+    main()
